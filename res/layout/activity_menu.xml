@@ -59,18 +59,22 @@
     android:id="@+id/user_dept"
     android:singleLine="true"
        />  
-  </RelativeLayout>  
+  </RelativeLayout> 
+  <RelativeLayout 
+     android:layout_width="fill_parent"
+     android:layout_height="fill_parent"  
+     android:layout_below="@+id/menu_top_layout"  
+     android:id="@+id/menu_list_layout"
+      >
   <ListView 
-      android:layout_below="@+id/menu_top_layout"
+    
      android:layout_width="fill_parent"
      android:layout_height="fill_parent"
-     android:divider="@drawable/line_bg"
+     android:divider="#00000000"
       android:cacheColorHint="#00000000"
      android:fadingEdge="none"
      android:scrollingCache="false"
      android:id="@+id/menu_list" 
-      
-      
       ></ListView>
-
+</RelativeLayout> 
 </RelativeLayout>

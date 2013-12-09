@@ -2,6 +2,10 @@ package com.zhsystem.meeting.Main;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+
+import com.zhsystem.meeting.Adapter.MenuListAdapter;
+import com.zhsystem.meeting.Bean.MenuBean;
 
 import android.app.Activity;
 import android.content.Context;
@@ -21,10 +25,13 @@ import android.view.WindowManager;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.View.OnClickListener;
 import android.view.ViewTreeObserver.OnPreDrawListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -85,10 +92,17 @@ public class MainActivity extends Activity implements OnGestureListener,OnClickL
 	public static int special_Reminder = 0;
 	public static int common_Reminder = 0;
 	public static int Calendar_WeekFontColor = 0;
-	private String UserName = "";
 	private int screenWidth = 0;
 	private int screenHeight = 0;
 	private ImageView main_menu_btn;
+	
+	/*menu菜单*/
+	private TextView user_name;
+	private TextView user_dept;
+	private TextView user_company;
+	private ListView menu_list;
+	private List<MenuBean> Menu_dataList;
+	private MenuListAdapter menu_adapter;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -98,13 +112,69 @@ public class MainActivity extends Activity implements OnGestureListener,OnClickL
 		initValue();
 		initView();	
 		initMenuView();
+		initData_menu();
 	}
 	
 	private void initMenuView() {
-
+		user_name=(TextView) this.findViewById(R.id.user_name);
+		user_dept=(TextView) this.findViewById(R.id.user_dept);
+		user_company=(TextView) this.findViewById(R.id.user_company);
+		RelativeLayout menu=(RelativeLayout) this.findViewById(R.id.menu_list_layout);
+		RelativeLayout.LayoutParams pm_top=new RelativeLayout.LayoutParams(screenWidth,dipTopx(this, 600));
+		pm_top.addRule(RelativeLayout.BELOW, R.id.menu_top_layout);
+		menu.setLayoutParams(pm_top);
+		menu_list=(ListView) this.findViewById(R.id.menu_list);
 		
 	}
+	
+	private void initData_menu(){
+		Menu_dataList=new ArrayList<MenuBean>();
+		int[]images={R.drawable.home_btn_bg,R.drawable.meet_btn_bg,
+				R.drawable.signin_btn_bg,R.drawable.setting_btn_bg};
+		String home=getResources().getString(R.string.menu_home);
+		String meeting=getResources().getString(R.string.menu_meeting);
+		String singin=getResources().getString(R.string.menu_singin);
+		String setting=getResources().getString(R.string.menu_setting);
+		String[]names={home,meeting,singin,setting};
+		for(int i=0;i<4;i++){
+			MenuBean bean=new MenuBean();
+			bean.setImageID(images[i]);
+			bean.setTitle(names[i]);
+			Menu_dataList.add(bean);
+		}
+		Log.e("长度", Menu_dataList.size()+"");
+		menu_adapter=new MenuListAdapter(this,Menu_dataList);
+		menu_list.setAdapter(menu_adapter);
+	}
+	
+	public void menuList_onClick(){
+		menu_list.setOnItemClickListener(new OnItemClickListener(){
 
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Auto-generated method stub
+				switch(arg2){
+				case 0:
+					if (myViewGroup.isMenuOpen){
+						myViewGroup.closeMenu();
+					}
+					else{
+						myViewGroup.showMenu();
+					}
+					break;
+				case 1:
+					//跳转到会议界面
+					break;
+				case 2:
+					//跳转到签到界面
+					break;
+				case 3:
+					//跳转到设置界面
+					break;
+				}
+			}});
+	}
 	@SuppressWarnings("deprecation")
 	private void initMainView() {
 		gestureDetector = new GestureDetector(this);
