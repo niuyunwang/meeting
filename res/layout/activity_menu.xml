@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/menu_background"
+ >
+  <RelativeLayout 
+   android:layout_width="fill_parent"
+   android:layout_height="wrap_content"
+   android:id="@+id/menu_top_layout"  
+   android:background="@drawable/main_top_bg" 
+      >
+   <ImageView 
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/user_image"
+    android:background="#00000000"
+    android:scaleType="centerInside"   
+    android:layout_marginLeft="10dip"   
+    android:layout_centerVertical="true" 
+    android:id="@+id/user_image" 
+       />   
+    
+   <TextView 
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_toRightOf="@+id/user_image" 
+    android:layout_marginLeft="10dip"
+    android:text="王磊"
+    android:textColor="@color/white"
+    android:textSize="@dimen/text_size_login"
+    android:layout_alignTop="@+id/user_image"   
+    android:layout_marginTop="8dip"
+    android:id="@+id/user_name"
+       />
+   <TextView 
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_toRightOf="@+id/user_image" 
+    android:layout_below="@+id/user_name"
+    android:layout_marginLeft="10dip"
+    android:text="天津市系統工程有限責任公司"
+    android:textColor="@color/white"
+    android:textSize="@dimen/text_size_login"  
+    android:layout_marginTop="5dip"
+    android:id="@+id/user_company"
+    android:singleLine="true"
+       />
+     <TextView 
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_toRightOf="@+id/user_image" 
+    android:layout_below="@+id/user_company"
+    android:layout_marginLeft="10dip"
+    android:text="管理部"
+    android:textColor="@color/white"
+    android:textSize="@dimen/text_size_login"  
+    android:layout_marginTop="5dip"
+    android:id="@+id/user_dept"
+    android:singleLine="true"
+       />  
+  </RelativeLayout>  
+  <ListView 
+      android:layout_below="@+id/menu_top_layout"
+     android:layout_width="fill_parent"
+     android:layout_height="fill_parent"
+     android:divider="@drawable/line_bg"
+      android:cacheColorHint="#00000000"
+     android:fadingEdge="none"
+     android:scrollingCache="false"
+     android:id="@+id/menu_list" 
+      
+      
+      ></ListView>
+
+</RelativeLayout>
